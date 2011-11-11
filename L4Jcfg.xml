@@ -1,0 +1,31 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>release\Breakout.jar</jar>
+  <outfile>release\Breakout.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir></chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>false</customProcName>
+  <stayAlive>false</stayAlive>
+  <icon></icon>
+  <jre>
+    <path></path>
+    <minVersion>1.6.0</minVersion>
+    <maxVersion></maxVersion>
+    <dontUsePrivateJres>false</dontUsePrivateJres>
+    <initialHeapSize>64</initialHeapSize>
+    <maxHeapSize>512</maxHeapSize>
+  </jre>
+  <versionInfo>
+    <fileDescription>Breakout</fileDescription>
+    <copyright>Pavels Trifonovs 2011</copyright>
+    <productName>Breakout</productName>
+    <companyName></companyName>
+    <internalName>Breakout</internalName>
+    <originalFilename>Breakout.exe</originalFilename>
+  </versionInfo>
+</launch4jConfig>

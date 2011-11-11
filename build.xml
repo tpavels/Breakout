@@ -1,0 +1,68 @@
+<project name="Breakout" basedir="." default="all">
+
+	<property name="base.dir" value="${basedir}" />
+	<property name="build.dir" value="${base.dir}/build" />
+	<property name="src.dir" value="${base.dir}/src" />
+	<property name="classes.dir" value="${build.dir}/classes" />
+	
+	<property name="release.dir" location="release" />
+	<property name="launch4j.dir" location="C:/Launch4j" />
+	
+	<property name="main-class" value="github.tpavels.breakout.Breakout" />
+	
+	<property name="filename" value="${release.dir}/Breakout.exe" />
+	<property name="fileversion" value="0.1.0.0" />
+	<property name="txtfileversion" value="ver 0.1.0" />
+
+	<path id="classpath">
+		<fileset dir="." includes="**/*.jar" />
+	</path>
+
+	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" 
+		classpath="${launch4j.dir}/launch4j.jar;${launch4j.dir}/lib/xstream.jar" />
+		
+	<target name="clean" >
+		<echo>Cleans build folder</echo>
+		<delete dir="${build.dir}" />
+		<delete dir="${release.dir}" />
+	</target>
+
+	<target name="compile">
+		<echo>Compiles sources</echo>
+		<mkdir dir="${classes.dir}"  />
+		<javac srcdir="${src.dir}" includeAntRuntime="false" destdir="${classes.dir}" 
+			classpathref="classpath" excludes="**/*Test*.java" />
+	</target>
+
+	<target name="create_jar">
+		<echo>Builds jar</echo>
+		<mkdir dir="${release.dir}" />
+		<jar destfile="${release.dir}/${ant.project.name}.jar" >
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+				<attribute name="Class-Path" value="." />
+			</manifest>
+			<fileset dir="${classes.dir}"/>
+		</jar>
+	</target>
+
+	<target name="create-exe" description="Creates the exe file">
+		<echo>Creates exe</echo>
+		<launch4j 
+			configFile="${basedir}/L4Jcfg.xml" 
+			outfile="${filename}"
+			fileVersion="${fileversion}" 
+			txtFileVersion="${txtfileversion}"
+			productVersion="${fileversion}" 
+			txtProductVersion="${txtfileversion}"
+		/>
+	</target>
+
+	<target name="all" description="Does all the steps to create a full release automatically">
+		<antcall target="clean" />
+		<antcall target="compile" />
+		<antcall target="create_jar" />
+		<antcall target="create-exe" />
+	</target>
+
+</project>
