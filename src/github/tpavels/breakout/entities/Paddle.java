@@ -12,7 +12,7 @@ public class Paddle {
 
 	private static final int BOTTON_GAP = 15;
 	private static final double SPEED = 1;
-	
+
 	/**
 	 * A gap between paddle and borders
 	 */
@@ -62,7 +62,7 @@ public class Paddle {
 	public void right() {
 		centerX = centerX + SPEED*width/14;
 		final double rightBorder = screenSize.getSize().width - Constants.BORDER;
-        if ((centerX + halfWidth) >= (rightBorder - RIGHT_LEFT_GAP)) {
+		if ((centerX + halfWidth) >= (rightBorder - RIGHT_LEFT_GAP)) {
 			centerX = rightBorder - halfWidth - Constants.BORDER*2;
 		}
 	}
@@ -77,11 +77,11 @@ public class Paddle {
 	 * @param gfx2d Graphics2D from image
 	 */
 	public void display(Graphics2D gfx2d) {
-        gfx2d.setColor(color);
-        double x = centerX - halfWidth;
-        double y = centerY - halfHeight;
-        gfx2d.fill(new RoundRectangle2D.Double(x, y, width, height, height, height));
-    }
+		gfx2d.setColor(color);
+		double x = centerX - halfWidth;
+		double y = centerY - halfHeight;
+		gfx2d.fill(new RoundRectangle2D.Double(x, y, width, height, height, height));
+	}
 
 
 	/**

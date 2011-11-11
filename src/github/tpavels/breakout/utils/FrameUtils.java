@@ -18,7 +18,7 @@ public class FrameUtils {
 	 * @param insets component border
 	 */
 	public static void addUIComponent(JPanel jp, JComponent jc, int loc, int type,
-															int[] decart, Insets insets){
+			int[] decart, Insets insets){
 		GridBagConstraints c = new GridBagConstraints();
 		c.anchor = loc;
 		c.fill = type;

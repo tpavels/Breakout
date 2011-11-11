@@ -13,11 +13,11 @@ import javax.swing.JPanel;
 public class GameFrame extends JPanel implements Constants {
 
 	/**
-     *
-     */
-    private static final long serialVersionUID = -1818321739720685072L;
+	 *
+	 */
+	private static final long serialVersionUID = -1818321739720685072L;
 
-    public void initialize() {
+	public void initialize() {
 		final JPanel containerPanel = new JPanel(new GridBagLayout());
 
 		JFrame frame = new JFrame(FRAME_TITLE);

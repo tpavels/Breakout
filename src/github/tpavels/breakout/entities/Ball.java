@@ -14,7 +14,7 @@ import java.util.Random;
 public class Ball {
 
 	private static final Color BALL_COLOR = Color.WHITE;
-    private static final int MAX_SPEED = 6;
+	private static final int MAX_SPEED = 6;
 
 	private double centerX, centerY;
 	private double vX, vY;
@@ -42,18 +42,18 @@ public class Ball {
 		setDefaultCoordinates();
 	}
 
-    /**
-     * Draw ball
-     * @param gfx2d Graphics2D of field image
-     */
-    public void display(Graphics2D gfx2d) {
-        gfx2d.setColor(color);
-        double x = centerX - radius;
-        double y = centerY - radius;
-        gfx2d.fill(new Ellipse2D.Double(x, y, radius*2, radius*2));
-    }
+	/**
+	 * Draw ball
+	 * @param gfx2d Graphics2D of field image
+	 */
+	public void display(Graphics2D gfx2d) {
+		gfx2d.setColor(color);
+		double x = centerX - radius;
+		double y = centerY - radius;
+		gfx2d.fill(new Ellipse2D.Double(x, y, radius*2, radius*2));
+	}
 
-    /**
+	/**
 	 * @return the centerX
 	 */
 	public double getCenterX() {
@@ -114,10 +114,10 @@ public class Ball {
 		}
 	}
 
-    /**
-     * Takes off the ball from paddle
-     */
-    public void start() {
+	/**
+	 * Takes off the ball from paddle
+	 */
+	public void start() {
 		isGlued = false;
 	}
 
@@ -126,26 +126,26 @@ public class Ball {
 	}
 
 	private void bounceOfBorder() {
-	    if ((centerY - radius) <= 0) { // top
-	        vY = Math.abs(vY);
-	        score.resetMultipier();
-	    } else if ((centerX - radius) <= 0) { // right
-	        vX = Math.abs(vX);
-	        score.resetMultipier();
-	    } else if ((centerX + radius) >= screenSize.getSize().width - Constants.BORDER - radius) { // left
-	        vX = Math.abs(vX) * -1;
-	        score.resetMultipier();
-	    }
-//	    } else if ((centerY + radius) >= screenSize.getSize().height - Constants.BORDER - radius) { // bottom
-//	        vY = Math.abs(vY) * -1;
-//	    }
+		if ((centerY - radius) <= 0) { // top
+			vY = Math.abs(vY);
+			score.resetMultipier();
+		} else if ((centerX - radius) <= 0) { // right
+			vX = Math.abs(vX);
+			score.resetMultipier();
+		} else if ((centerX + radius) >= screenSize.getSize().width - Constants.BORDER - radius) { // left
+			vX = Math.abs(vX) * -1;
+			score.resetMultipier();
+		}
+		//	    } else if ((centerY + radius) >= screenSize.getSize().height - Constants.BORDER - radius) { // bottom
+		//	        vY = Math.abs(vY) * -1;
+		//	    }
 	}
 
 	private void bounceOfPaddle() {
 		double distX = Math.abs(centerX - paddle.getCenterX());
 		double distY = Math.abs(centerY - paddle.getCenterY());
 		if ((distX <= paddle.getWidth()/2+radius && distY <= paddle.getHeight()/2+radius)){
-		    score.resetMultipier();
+			score.resetMultipier();
 			vY = -vY;
 			centerY = paddle.getCenterY() - paddle.getHeight();
 			// it is more interesting if the ball will bounce from paddle different way
@@ -157,7 +157,7 @@ public class Ball {
 		}
 		double cornerDistance = Math.pow(distX - paddle.getWidth()/2,2) + Math.pow(distY - paddle.getHeight()/2,2);
 		if (cornerDistance <= (radius*radius)) {
-		    score.resetMultipier();
+			score.resetMultipier();
 			centerY = paddle.getCenterY() - paddle.getHeight();
 			// rare and not tested
 			if (vX < 0){
@@ -169,45 +169,45 @@ public class Ball {
 	}
 
 	private void bounceOfWall() {
-	    Collision collision = wall.collision(this);
-	    Random rYDirection = new Random();
-	    Random rXDirection = new Random();
-	    switch (collision) {
-	        case VERTICAL:
-	            vX = -vX;
-	            score.incrementScore();
-	            break;
-	        case HORIZONTAL:
-	            vY = -vY;
-	            score.incrementScore();
-	            break;
-	        case CORNER:
-	            //TODO elaborate
-	        	boolean bY = rYDirection.nextBoolean();
-	        	boolean bX = rXDirection.nextBoolean();
-	        	//randomize behavior
-	        	vY = vY * (bY ? -1 : 1);
-	            vX = -vX * (bX ? -1 : 1);
-	            score.incrementScore();
-	            break;
-	        case NONE:
-	            // do nothing
-	            break;
-	        default:
-	            System.err.println("ERROR - bounceOfWall: incorrect collision type");
-	            break;
-	    }
+		Collision collision = wall.collision(this);
+		Random rYDirection = new Random();
+		Random rXDirection = new Random();
+		switch (collision) {
+		case VERTICAL:
+			vX = -vX;
+			score.incrementScore();
+			break;
+		case HORIZONTAL:
+			vY = -vY;
+			score.incrementScore();
+			break;
+		case CORNER:
+			//TODO elaborate
+			boolean bY = rYDirection.nextBoolean();
+			boolean bX = rXDirection.nextBoolean();
+			//randomize behavior
+			vY = vY * (bY ? -1 : 1);
+			vX = -vX * (bX ? -1 : 1);
+			score.incrementScore();
+			break;
+		case NONE:
+			// do nothing
+			break;
+		default:
+			System.err.println("ERROR - bounceOfWall: incorrect collision type");
+			break;
+		}
 	}
 
 	private void setDefaultCoordinates() {
-        this.centerX = paddle.getCenterX();
-        this.centerY = paddle.getCenterY()-paddle.getHeight()/2-radius;
-    }
+		this.centerX = paddle.getCenterX();
+		this.centerY = paddle.getCenterY()-paddle.getHeight()/2-radius;
+	}
 
 	private void setDefaultRadius() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		this.screenSize = toolkit.getScreenSize();
 		this.radius = screenSize.getSize().width / 250;
-    }
+	}
 
 }

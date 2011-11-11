@@ -7,22 +7,22 @@ import java.awt.Color;
  *
  */
 public class Brick  {
-	
+
 	private Color color = null;
 	private int centerX = 0;
 	private int centerY = 0;
 	private double width = 0;
 	private double height = 0;
 	private boolean exists = false; 
-	
-	
+
+
 	public Brick(Color color, double width, double height) {
 		this.color = color;
 		this.width = width;
 		this.height = height;
 		exists = true;
 	}
-	
+
 	/**
 	 * Sets brick center coordinates
 	 * @param startX x 
@@ -32,7 +32,7 @@ public class Brick  {
 		centerX = (int) (startX + width/2);
 		centerY = (int) (startY + height/2);
 	}
-	
+
 	/**
 	 * @return true if brick is visible
 	 */
@@ -85,7 +85,7 @@ public class Brick  {
 	public Color getColor() {
 		return color;
 	}
-	
-	
+
+
 
 }

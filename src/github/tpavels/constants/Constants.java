@@ -11,18 +11,18 @@ public interface Constants {
 	}
 
 	public enum Collision {
-	    NONE,
-	    VERTICAL,
-	    HORIZONTAL,
-	    CORNER,
+		NONE,
+		VERTICAL,
+		HORIZONTAL,
+		CORNER,
 
 	}
 
 	public enum Key {
-	    LEFT,
-	    RIGHT,
-	    SPACE,
-	    NONE,
+		LEFT,
+		RIGHT,
+		SPACE,
+		NONE,
 
 	}
 

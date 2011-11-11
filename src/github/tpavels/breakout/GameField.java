@@ -25,8 +25,8 @@ import javax.swing.JPanel;
 
 public class GameField extends JPanel implements Runnable {
 
-    private static final long serialVersionUID = -6384464023813347210L;
-    private static final String FONT = "Arial";
+	private static final long serialVersionUID = -6384464023813347210L;
+	private static final String FONT = "Arial";
 
 	private boolean running = false;
 	private Wall wall = null;
@@ -48,14 +48,14 @@ public class GameField extends JPanel implements Runnable {
 		drawText = new TextUtils();
 		keyHandler = new KeyHandler(this);
 		ball = new Ball(paddle, wall, score);
-		
-		
+
+
 		setBackground(Color.BLACK);
 		setFocusable(true);
-	    requestFocus();
-	    addKeyListener(keyHandler);
+		requestFocus();
+		addKeyListener(keyHandler);
 
-	    wall.create();
+		wall.create();
 	}
 
 	public void addNotify(){
@@ -63,14 +63,14 @@ public class GameField extends JPanel implements Runnable {
 		startGame();
 	}
 
-    @Override public void paint(Graphics g) {
+	@Override public void paint(Graphics g) {
 		paintComponent(g);
 	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		if (image != null) {
-            g.drawImage(image, 0, 0, null);
-        }
+			g.drawImage(image, 0, 0, null);
+		}
 	}
 
 	public void run() {
@@ -82,7 +82,7 @@ public class GameField extends JPanel implements Runnable {
 			gameUpdate();
 			gameRender();
 			paintScreen();
-			
+
 			// adjust sleep time
 			timeDiff = System.currentTimeMillis() - beforeTime;
 			sleepTime = period - timeDiff;
@@ -99,27 +99,27 @@ public class GameField extends JPanel implements Runnable {
 		}
 	}
 
-    public void stopGame() {
+	public void stopGame() {
 		running = false;
 	}
 
 	private Graphics2D gfx2d = null;
 
-    private boolean win = false;
-    private boolean gameOver = false;
-    private boolean pause = false;
-    private int iWidth = 1;
-    private int iHeight = 1;
+	private boolean win = false;
+	private boolean gameOver = false;
+	private boolean pause = false;
+	private int iWidth = 1;
+	private int iHeight = 1;
 
-    private void gameRender() {
+	private void gameRender() {
 		if (image == null){
 			image = createImage(iWidth, iHeight);
 			if (image == null) {
 				System.out.println("image is null");
 				return;
 			} else {
-                gfx2d = (Graphics2D) image.getGraphics();
-            }
+				gfx2d = (Graphics2D) image.getGraphics();
+			}
 		}
 		gfx2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
@@ -128,69 +128,69 @@ public class GameField extends JPanel implements Runnable {
 		paddle.display(gfx2d);
 		wall.display(gfx2d);
 		ball.display(gfx2d);
-        drawText.displayScore(gfx2d, score);
+		drawText.displayScore(gfx2d, score);
 
-        if (pause) {
-            drawText.displayPause(gfx2d, this.getSize());
-        }
+		if (pause) {
+			drawText.displayPause(gfx2d, this.getSize());
+		}
 		if (gameOver) {
-		    drawText.displayGameOver(gfx2d, score, this.getSize());
-		    stopGame();
+			drawText.displayGameOver(gfx2d, score, this.getSize());
+			stopGame();
 		}
 		if (win) {
-		    drawText.displayWin(gfx2d, score, this.getSize());
-		    stopGame();
+			drawText.displayWin(gfx2d, score, this.getSize());
+			stopGame();
 		}
 
 		//renderFPS();
 	}
-    
-    
-    private boolean startPosition = true;
-    
+
+
+	private boolean startPosition = true;
+
 	/**
-     * @return the startPosition
-     */
-    public boolean isStartPosition() {
-        return startPosition;
-    }
+	 * @return the startPosition
+	 */
+	public boolean isStartPosition() {
+		return startPosition;
+	}
 
-    private void gameUpdate(){
-	    Key keyPressed = keyHandler.getKeyPressed();
+	private void gameUpdate(){
+		Key keyPressed = keyHandler.getKeyPressed();
 
-	    // movement keys
-	    if (!gameOver && !pause){
-	        switch (keyPressed) {
-	            case LEFT:
-	                paddle.left();
-	                break;
-	            case RIGHT:
-	                paddle.right();
-	                break;
-	            case SPACE:
-	                if (startPosition) {
-	                    ball.start();
-	                    startPosition = false;
-	                }
-	                keyHandler.resetKey(); // not sure it's needed here
-	                break;
-	            default:
-	                // do nothing
-	                break;
-	        }
+		// movement keys
+		if (!gameOver && !pause){
+			switch (keyPressed) {
+			case LEFT:
+				paddle.left();
+				break;
+			case RIGHT:
+				paddle.right();
+				break;
+			case SPACE:
+				if (startPosition) {
+					ball.start();
+					startPosition = false;
+				}
+				keyHandler.resetKey(); // not sure it's needed here
+				break;
+			default:
+				// do nothing
+				break;
+			}
 
-            ball.move();
+			ball.move();
 
-	        // game over
-	        if (ball.offScreen()){
-	            gameOver = true;
-	        }
+			// game over
+			if (ball.offScreen()){
+				gameOver = true;
+			}
 
-	        // win
-	        if (wall.isDestroyed()){
-	            win = true;
-	        }
-	    }
+			// win
+			if (wall.isDestroyed()){
+				win = true;
+			}
+		}
 	}
 
 	private void paintScreen() {
@@ -198,8 +198,8 @@ public class GameField extends JPanel implements Runnable {
 		try {
 			g = this.getGraphics();
 			if ((g != null) && (image != null)) {
-                g.drawImage(image, 0, 0, null);
-            }
+				g.drawImage(image, 0, 0, null);
+			}
 			g.dispose();
 		} catch (Exception e) {
 			System.err.println("Graphics context error: " + e);
@@ -207,18 +207,18 @@ public class GameField extends JPanel implements Runnable {
 	}
 
 	public void pause() {
-	    if (pause) {
-	        pause = false;
-	    } else {
-	        pause = true;
-	    }
+		if (pause) {
+			pause = false;
+		} else {
+			pause = true;
+		}
 	}
 
 	private void displayBackground() {
 		gfx2d.setColor(Color.BLACK);
 		gfx2d.fill(new Rectangle2D.Double(0, 0, iWidth, iHeight));
 	}
-	
+
 	private long nextSecond = System.currentTimeMillis() + 1000;
 	private int frameInLastSecond = 25;
 	private int framesInCurrentSecond = 0;
